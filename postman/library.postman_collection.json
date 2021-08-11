@@ -1,0 +1,142 @@
+{
+	"info": {
+		"_postman_id": "04d217b7-3f30-4535-884f-900bb3154e2a",
+		"name": "library",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "books",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Ruta}}/books",
+					"host": [
+						"{{Ruta}}"
+					],
+					"path": [
+						"books"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "books",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"bookName\" : \"Los ojos del perro siberiano\", \r\n    \"isbn13\": \"978-987-545-706-5\", \r\n    \"author\": \"Antonio Santa Ana\"\r\n}"
+				},
+				"url": {
+					"raw": "{{Ruta}}/books",
+					"host": [
+						"{{Ruta}}"
+					],
+					"path": [
+						"books"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "books/:id",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"bookName\" : \"Los ojos del perro siberiano\", \r\n    \"isbn13\": \"978-987-545-706-5\", \r\n    \"author\": \"Antonio Santa Ana\"\r\n}"
+				},
+				"url": {
+					"raw": "{{Ruta}}/books/:id",
+					"host": [
+						"{{Ruta}}"
+					],
+					"path": [
+						"books",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "11"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "book/:id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{Ruta}}/book/:id",
+					"host": [
+						"{{Ruta}}"
+					],
+					"path": [
+						"book",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "15"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "book/:id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{Ruta}}/book/:id",
+					"host": [
+						"{{Ruta}}"
+					],
+					"path": [
+						"book",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
