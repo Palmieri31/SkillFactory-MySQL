@@ -18,11 +18,3 @@ create table authors (
 ) ;
 
 
-SELECT id_book, book_name, isbn13, a.id_author, a.author_name, a.nationality FROM books as b INNER JOIN authors as a ON b.id_author = a.id_author WHERE id_book = 1;
-
-SELECT book_name, isbn13, id_author FROM books WHERE id_book = 1;
-INSERT INTO authors (author_name, nationality) VALUES ('Antonio Santa Ana', 'Argentina');
-INSERT INTO books (book_name, isbn13, id_author) VALUES ('Los ojos del perro siberiano', '978-987-545-706-4', '2');
-DELETE FROM books WHERE id_book = 1 LIMIT 1;
-select * from authors
-drop table books;
