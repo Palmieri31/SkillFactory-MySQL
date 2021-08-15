@@ -23,34 +23,78 @@
 			"response": []
 		},
 		{
-			"name": "books",
+			"name": "authors",
 			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"bookName\" : \"Los ojos del perro siberiano\", \r\n    \"isbn13\": \"978-987-545-706-5\", \r\n    \"author\": \"Antonio Santa Ana\"\r\n}"
-				},
+				"method": "GET",
+				"header": [],
 				"url": {
-					"raw": "{{Ruta}}/books",
+					"raw": "{{Ruta}}/authors",
 					"host": [
 						"{{Ruta}}"
 					],
 					"path": [
-						"books"
+						"authors"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "books/:id",
+			"name": "book",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"bookName\" : \"\", \r\n    \"isbn13\": \"\", \r\n    \"authorId\": \r\n}"
+				},
+				"url": {
+					"raw": "{{Ruta}}/book",
+					"host": [
+						"{{Ruta}}"
+					],
+					"path": [
+						"book"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "author",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"authorName\" : \"\", \r\n    \"nationality\": \"\"\r\n}"
+				},
+				"url": {
+					"raw": "{{Ruta}}/author",
+					"host": [
+						"{{Ruta}}"
+					],
+					"path": [
+						"author"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "book/:id",
 			"request": {
 				"method": "PUT",
 				"header": [
@@ -62,21 +106,55 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"bookName\" : \"Los ojos del perro siberiano\", \r\n    \"isbn13\": \"978-987-545-706-5\", \r\n    \"author\": \"Antonio Santa Ana\"\r\n}"
+					"raw": "{\r\n    \"bookName\" : \"\", \r\n    \"isbn13\": \"\", \r\n    \"authorId\": \r\n}"
 				},
 				"url": {
-					"raw": "{{Ruta}}/books/:id",
+					"raw": "{{Ruta}}/book/:id",
 					"host": [
 						"{{Ruta}}"
 					],
 					"path": [
-						"books",
+						"book",
 						":id"
 					],
 					"variable": [
 						{
 							"key": "id",
-							"value": "11"
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "author/:id",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"authorName\" : \"\", \r\n    \"nationality\": \"\"\r\n}"
+				},
+				"url": {
+					"raw": "{{Ruta}}/author/:id",
+					"host": [
+						"{{Ruta}}"
+					],
+					"path": [
+						"author",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": ""
 						}
 					]
 				}
@@ -100,7 +178,7 @@
 					"variable": [
 						{
 							"key": "id",
-							"value": "15"
+							"value": ""
 						}
 					]
 				}
@@ -131,7 +209,38 @@
 					"variable": [
 						{
 							"key": "id",
-							"value": "1"
+							"value": ""
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "author/:id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{Ruta}}/author/:id",
+					"host": [
+						"{{Ruta}}"
+					],
+					"path": [
+						"author",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": ""
 						}
 					]
 				}
