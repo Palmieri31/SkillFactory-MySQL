@@ -56,7 +56,7 @@ app.get('/book/:id', (req, res) => {
 
 app.post('/book', (req, res) => {
   const { bookName, isbn13, authorId } = req.body;
-  if (!bookName || !isbn13 || !authorId) {
+  if (!bookName || !isbn13 || authorId) {
     res.status(400).json({ message: 'complete the requested fields' });
     return;
   }
