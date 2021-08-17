@@ -15,8 +15,7 @@ app.get('/books', (req, res) => {
     } else if (!result.length) {
       res.status(404).json({ message: 'no books found' });
     } else {
-      const data = [];
-      result.forEach((book) => data.push({
+      const books = result.map((book) => ({
         id_book: book.id_book,
         book_name: book.book_name,
         isbn13: book.isbn13,
@@ -26,7 +25,7 @@ app.get('/books', (req, res) => {
           nationality: book.nationality,
         },
       }));
-      res.status(200).json(data);
+      res.status(200).json(books);
     }
   });
 });
@@ -40,8 +39,7 @@ app.get('/book/:id', (req, res) => {
     } else if (!result.length) {
       res.status(404).json({ message: 'The requested book was not found' });
     } else {
-      const data = [];
-      result.forEach((book) => data.push({
+      const books = result.map((book) => ({
         id_book: book.id_book,
         book_name: book.book_name,
         isbn13: book.isbn13,
@@ -51,7 +49,7 @@ app.get('/book/:id', (req, res) => {
           nationality: book.nationality,
         },
       }));
-      res.status(200).json(data);
+      res.status(200).json(books);
     }
   });
 });
