@@ -33,7 +33,7 @@ app.get('/books', (req, res) => {
 app.get('/book/:id', (req, res) => {
   const { id } = req.params;
 
-  connection.query(`SELECT id_book, book_name, isbn13, a.id_author, a.author_name, a.nationality FROM books as b INNER JOIN authors as a ON b.id_author = a.id_author WHERE id_book = ${id} LIMIT 1`, (err, result) => {
+  connection.query('SELECT id_book, book_name, isbn13, a.id_author, a.author_name, a.nationality FROM books as b INNER JOIN authors as a ON b.id_author = a.id_author WHERE id_book = ? LIMIT 1', [id], (err, result) => {
     if (err) {
       res.status(500).json({ message: 'database error' });
     } else if (!result.length) {
@@ -56,8 +56,11 @@ app.get('/book/:id', (req, res) => {
 
 app.post('/book', (req, res) => {
   const { bookName, isbn13, authorId } = req.body;
-
-  connection.query(`INSERT INTO books (book_name, isbn13, id_author) VALUES ('${bookName}', '${isbn13}', ${authorId})`, (err) => {
+  if (!bookName || !isbn13 || !authorId) {
+    res.status(400).json({ message: 'complete the requested fields' });
+    return;
+  }
+  connection.query('INSERT INTO books (book_name, isbn13, id_author) VALUES (?, ?, ?)', [bookName, isbn13, authorId], (err) => {
     if (err) {
       if (err.code === 'ER_NO_REFERENCED_ROW_2') {
         res.status(500).json({ message: 'The requested author was not found' });
@@ -75,8 +78,12 @@ app.post('/book', (req, res) => {
 app.put('/book/:id', (req, res) => {
   const { id } = req.params;
   const { bookName, isbn13, authorId } = req.body;
+  if (!bookName || !isbn13 || !authorId) {
+    res.status(400).json({ message: 'complete the requested fields' });
+    return;
+  }
 
-  connection.query(`UPDATE books SET book_name = '${bookName}', isbn13 = '${isbn13}', id_author = ${authorId} WHERE id_book = ${id} LIMIT 1`, (err, result) => {
+  connection.query('UPDATE books SET book_name = ?, isbn13 = ?, id_author = ? WHERE id_book = ? LIMIT 1', [bookName, isbn13, authorId, id], (err, result) => {
     if (err) {
       if (err.code === 'ER_NO_REFERENCED_ROW_2') {
         res.status(500).json({ message: 'The requested author was not found' });
@@ -97,7 +104,7 @@ app.put('/book/:id', (req, res) => {
 app.delete('/book/:id', (req, res) => {
   const { id } = req.params;
 
-  connection.query(`DELETE FROM books WHERE id_book = ${id} LIMIT 1;`, (err, result) => {
+  connection.query('DELETE FROM books WHERE id_book = ? LIMIT 1;', [id], (err, result) => {
     if (err) {
       res.status(500).json({ message: 'database error' });
     } else if (!result.affectedRows) {
@@ -109,7 +116,7 @@ app.delete('/book/:id', (req, res) => {
 });
 
 app.get('/authors', (req, res) => {
-  connection.query('SELECT * FROM authors', (err, result) => {
+  connection.query('SELECT id_author, author_name, nationality  FROM authors', (err, result) => {
     if (err) {
       res.status(500).json({ message: 'database error' });
     } else if (!result.length) {
@@ -123,7 +130,7 @@ app.get('/authors', (req, res) => {
 app.get('/author/:id', (req, res) => {
   const { id } = req.params;
 
-  connection.query(`SELECT * FROM authors  WHERE id_author = ${id} LIMIT 1`, (err, result) => {
+  connection.query('SELECT * FROM authors  WHERE id_author = ? LIMIT 1', [id], (err, result) => {
     if (err) {
       res.status(500).json({ message: 'database error' });
     } else if (!result.length) {
@@ -136,8 +143,11 @@ app.get('/author/:id', (req, res) => {
 
 app.post('/author', (req, res) => {
   const { authorName, nationality } = req.body;
-
-  connection.query(`INSERT INTO authors (author_name, nationality) VALUES ('${authorName}', '${nationality}')`, (err) => {
+  if (!authorName || !nationality) {
+    res.status(400).json({ message: 'complete the requested fields' });
+    return;
+  }
+  connection.query('INSERT INTO authors (author_name, nationality) VALUES (?, ?)', [authorName, nationality], (err) => {
     if (err) {
       res.status(500).json({ message: 'database error' });
     } else {
@@ -149,8 +159,11 @@ app.post('/author', (req, res) => {
 app.put('/author/:id', (req, res) => {
   const { id } = req.params;
   const { authorName, nationality } = req.body;
-
-  connection.query(`UPDATE authors SET author_name = '${authorName}', nationality = '${nationality}' WHERE id_author = ${id} LIMIT 1`, (err, result) => {
+  if (!authorName || !nationality) {
+    res.status(400).json({ message: 'complete the requested fields' });
+    return;
+  }
+  connection.query('UPDATE authors SET author_name = ?, nationality = ? WHERE id_author = ? LIMIT 1', [authorName, nationality, id], (err, result) => {
     if (err) {
       res.status(500).json({ message: 'database error' });
     } else if (!result.affectedRows) {
